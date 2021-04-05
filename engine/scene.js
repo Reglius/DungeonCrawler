@@ -68,8 +68,9 @@ export default class Scene {
             for (var i = 0; i < diagram.length; i++){
                 for (var j = 0; j < diagram[0].length; j++){
 
-                    if (diagram[i][j] === 1){
+                    if (diagram[i][j] !== 0){
                         boundry++;
+
                         let gameObjectDef = this.deserializeObject({
                             gameObject: {
                               name: "boundry" + boundry,
@@ -80,9 +81,16 @@ export default class Scene {
                             },x: 0, 
                               y: 0
                           });
-                          
-                        gameObjectDef.x = ((j-1) * width) + offsetX;
-                        gameObjectDef.y = ((i-1) * height) + offsetY;
+                        
+                        console.log(Math.floor(diagram.length / 2));
+                        
+                        if (Math.floor(diagram.length / 2) !== (diagram.length / 2)){
+                            gameObjectDef.x = (offsetX) - ((Math.floor(diagram.length / 2) - j) * width);
+                            gameObjectDef.y = (offsetY) - ((Math.floor(diagram[j].length / 2) - i) * height);
+                        } else {
+                            gameObjectDef.x = (offsetX) - ((diagram.length / 2 - j) * width) + (width * .5);
+                            gameObjectDef.y = (offsetY) - (((diagram.length / 2) - i) * height) + (height * .5);
+                        }
                         console.log(gameObjectDef.name + ": x: " + gameObjectDef.x + " y:" + gameObjectDef.y);
 
                         // let gameObject = GameObject.deserialize(gameObjectDef);

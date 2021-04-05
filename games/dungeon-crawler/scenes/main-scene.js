@@ -17,10 +17,22 @@ export default {
     { gameObject: { name: "ScreenTextShadow", components: [{ name: "ScreenTextComponent", args: ["DungeonCrawler", { color: "gray" }] }] }, x: 102, y: 42 },
     { gameObject: { name: "ScreenText", components: [{ name: "ScreenTextComponent", args: ["DungeonCrawler", { color: "white" }] }] }, x: 100, y: 40 },
   ],
+  // mapLayout: [
+  //   [1, 0, 0],
+  //   [0, 1, 0],
+  //   [0, 0, 1],
+  //  ]
+  // mapLayout: [
+  //   [1, 0, 0, 0],
+  //   [0, 1, 0, 0],
+  //   [0, 0, 1, 0],
+  //   [0, 0, 0, 1]
+  // ]
   mapLayout: [
-    [1, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0]
+    [1, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 1]
   ]
 }

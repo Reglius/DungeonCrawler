@@ -4,7 +4,7 @@ import SceneManager from "./scene-manager.js"
 export default class Scene {
 
     children = [];
-
+   
     static deserializeObject(objectDefinition) {
         let gameObject;
         let gameObjectDefinition;
@@ -21,6 +21,7 @@ export default class Scene {
     }
     
     static deserialize(sceneDefinition) {
+
         let toReturn = new Scene(); //Create a new Scene
         toReturn.name = sceneDefinition.name; //Set the scene's name (for reference later when we are changing scenes)
         for (let objectDefinition of sceneDefinition.children) { //Loop over all the children.
@@ -42,6 +43,13 @@ export default class Scene {
         if (sceneDefinition.mapLayout){
             let diagram = sceneDefinition.mapLayout;
             
+            let colors = new Map();
+            colors.set(1,"black");
+            colors.set("r", "red");
+            colors.set("b", "blue");
+            colors.set("y", "yellow");
+            colors.set("g", "green");
+
             // console.log(JSON.stringify(diagram, null, 2));
 
             //in the scenes the first child will be a ground game object, this will make it easy to get the 
@@ -55,13 +63,12 @@ export default class Scene {
             var width = (sizeX / diagram[0].length);
             var height = (sizeY / diagram.length);
 
-            console.log(name + "\nsize x: " + sizeX +
-                        "\nsize y: " + sizeY +
-                        "\noffset x: " + offsetX +
-                        "\noffset y: " + offsetY +
-                        "\nwidth: " + width +
-                        "\nheight: " + height);
-            
+            // console.log(name + "\nsize x: " + sizeX +
+            //             "\nsize y: " + sizeY +
+            //             "\noffset x: " + offsetX +
+            //             "\noffset y: " + offsetY +
+            //             "\nwidth: " + width +
+            //             "\nheight: " + height);
             
             let boundry = 0;      
 
@@ -70,37 +77,30 @@ export default class Scene {
 
                     if (diagram[i][j] !== 0){
                         boundry++;
+                        
+                        let color = colors.get(diagram[i][j])
+                        //console.log(color);
 
                         let gameObjectDef = this.deserializeObject({
                             gameObject: {
                               name: "boundry" + boundry,
                               components: [
-                                { name: "DrawGeometryComponent", args: ["blue"] },
+                                { name: "DrawGeometryComponent", args: [color] },
                                 { name: "RectangleGeometryComponent", args: [width, height] },
                               ]
                             },x: 0, 
                               y: 0
                           });
                         
-                        console.log(Math.floor(diagram.length / 2));
+                        //console.log(Math.floor(diagram.length / 2));
                         
                         if (Math.floor(diagram.length / 2) !== (diagram.length / 2)){
                             gameObjectDef.x = (offsetX) - ((Math.floor(diagram.length / 2) - j) * width);
                             gameObjectDef.y = (offsetY) - ((Math.floor(diagram[j].length / 2) - i) * height);
                         } else {
                             gameObjectDef.x = (offsetX) - ((diagram.length / 2 - j) * width) + (width * .5);
-                            gameObjectDef.y = (offsetY) - (((diagram.length / 2) - i) * height) + (height * .5);
+                            gameObjectDef.y = (offsetY) - (((diagram[j].length / 2) - i) * height) + (height * .5);
                         }
-                        console.log(gameObjectDef.name + ": x: " + gameObjectDef.x + " y:" + gameObjectDef.y);
-
-                        // let gameObject = GameObject.deserialize(gameObjectDef);
-                        // gameObject: {
-                        //     name: "Ground",
-                        //     components: [
-                        //       { name: "DrawGeometryComponent", args: ["white"] },
-                        //       { name: "RectangleGeometryComponent", args: [640, 480] },
-                        //     ]
-                        //   }
                         
                         toReturn.addChild(gameObjectDef);
 
@@ -108,20 +108,6 @@ export default class Scene {
                 }
             }
 
-            // for (let objectDefinition of sceneDefinition.children) { //Loop over all the children.
-            //     let gameObject;
-            //     let gameObjectDefinition;
-            //     if (objectDefinition.prefabName) //It's a prefab
-            //         gameObjectDefinition = SceneManager.allPrefabs.find(i => i.name == objectDefinition.prefabName);
-            //     else //It's a one-off game object 
-            //         gameObjectDefinition = objectDefinition.gameObject;
-                
-            //     if (!gameObjectDefinition) throw "Could not find a prefab or game object description (deserializeObject) in " + JSON.stringify(objectDefinition, null, 2)
-            //     gameObject = GameObject.deserialize(gameObjectDefinition); //Deserialize the object
-            //     gameObject.x = objectDefinition.x || 0; //Set the x or default to 0. This is already the default, so this is redundant but very clear
-            //     gameObject.y = objectDefinition.y || 0; //Set the y or default to 0
-            //     toReturn.addChild(gameObject);
-            // }
         } else {console.log("No diagrams for the current scene! This is OK!");}
 
         return toReturn;

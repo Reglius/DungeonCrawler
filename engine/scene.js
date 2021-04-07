@@ -95,11 +95,11 @@ export default class Scene {
                         //console.log(Math.floor(diagram.length / 2));
                         
                         if (Math.floor(diagram.length / 2) !== (diagram.length / 2)){
-                            gameObjectDef.x = (offsetX) - ((Math.floor(diagram.length / 2) - j) * width);
-                            gameObjectDef.y = (offsetY) - ((Math.floor(diagram[i].length / 2) - i) * height);
+                            gameObjectDef.x = (offsetX) - ((Math.floor(diagram[i].length / 2) - j) * width);
+                            gameObjectDef.y = (offsetY) - ((Math.floor(diagram.length / 2) - i) * height);
                         } else {
-                            gameObjectDef.x = (offsetX) - ((diagram.length / 2 - j) * width) + (width * .5);
-                            gameObjectDef.y = (offsetY) - (((diagram[i].length / 2) - i) * height) + (height * .5);
+                            gameObjectDef.x = (offsetX) - ((diagram[i].length / 2 - j) * width) + (width * .5);
+                            gameObjectDef.y = (offsetY) - (((diagram.length / 2) - i) * height) + (height * .5);
                         }
                         
                         toReturn.addChild(gameObjectDef);

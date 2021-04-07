@@ -52,8 +52,8 @@ export default class Scene {
 
             // console.log(JSON.stringify(diagram, null, 2));
 
-            //in the scenes the first child will be a ground game object, this will make it easy to get the 
-            //size of the playing field for each scene since they can be different
+            //in the scenes the first child will be a ground game object
+            //since the game object hasnt been created yet we are going to have to parse arrays
             var sizeX = sceneDefinition.children[0].gameObject.components[1].args[0];
             var sizeY = sceneDefinition.children[0].gameObject.components[1].args[1];
             var offsetX = sceneDefinition.children[0].x;
@@ -96,10 +96,10 @@ export default class Scene {
                         
                         if (Math.floor(diagram.length / 2) !== (diagram.length / 2)){
                             gameObjectDef.x = (offsetX) - ((Math.floor(diagram.length / 2) - j) * width);
-                            gameObjectDef.y = (offsetY) - ((Math.floor(diagram[j].length / 2) - i) * height);
+                            gameObjectDef.y = (offsetY) - ((Math.floor(diagram[i].length / 2) - i) * height);
                         } else {
                             gameObjectDef.x = (offsetX) - ((diagram.length / 2 - j) * width) + (width * .5);
-                            gameObjectDef.y = (offsetY) - (((diagram[j].length / 2) - i) * height) + (height * .5);
+                            gameObjectDef.y = (offsetY) - (((diagram[i].length / 2) - i) * height) + (height * .5);
                         }
                         
                         toReturn.addChild(gameObjectDef);
@@ -140,6 +140,20 @@ export default class Scene {
         for (let i = 0; i < this.children.length; i++) {
             let child = this.children[i];
             child.draw(ctx);
+        }
+        // ctx.fillStyle = "grey";
+        // ctx.beginPath();
+        // ctx.arc(200, 200, 100, 0, 2 * Math.PI);
+        // ctx.rect(400, 0, -400, 400);
+        // ctx.fill();
+
+        if (this.name === "BlueScene") {
+            ctx.fillStyle = "grey";
+            ctx.beginPath();
+            ctx.arc(this.getGameObject("Hero").x, this.getGameObject("Hero").y, 100, 0, 2 * Math.PI);
+            let ground = this.getGameObject("Ground");
+            ctx.rect(ground.x - (ground.components[1].width / 2), ground.y - (ground.components[1].height / 2), ground.components[1].width, ground.components[1].height);
+            ctx.fill("evenodd");
         }
     }
 

@@ -19,26 +19,28 @@ export default class MainControllerComponent extends Engine.Component {
 
     this.heroX = this.hero.x;
     this.heroY = this.hero.y;
+    this.speed = this.hero.getComponent("KeyboardMoveComponent").speed;
+    
     if(this.heroX < ground.x - width/2){
       //Move left
       if(SceneManager.currentScene.name == "MainScene") return SceneManager.changeScene("RedScene")
       if(SceneManager.currentScene.name == "BlueScene") return SceneManager.changeScene("MainScene")
-      this.hero.x += 10;
+      this.hero.x += this.speed;
     }
     if(this.heroX > ground.x + width/2){
       //Move right
       if(SceneManager.currentScene.name == "RedScene") return SceneManager.changeScene("MainScene")
       if(SceneManager.currentScene.name == "MainScene") return SceneManager.changeScene("BlueScene")
       
-      this.hero.x -= 10
+      this.hero.x -= this.speed;
     }
     if(this.heroY < ground.y - height/2){
       //Move up
-      this.hero.y += 10;
+      this.hero.y += this.speed;
     }
     if(this.heroY > ground.y + height/2){
       //Move Down
-      this.hero.y -= 10;
+      this.hero.y -= this.speed;
     }
   }
   

@@ -109,6 +109,27 @@ export default class Scene {
             }
 
         } else {console.log("No diagrams for the current scene! This is OK!");}
+        
+        // adding key inventory here
+        var sizeX = sceneDefinition.children[0].gameObject.components[1].args[0];
+        var sizeY = sceneDefinition.children[0].gameObject.components[1].args[1];
+        var offsetX = sceneDefinition.children[0].x;
+        var offsetY = sceneDefinition.children[0].y;
+
+        let gameObjectDef = this.deserializeObject({
+            gameObject: {
+              name: "boundry" + boundry,
+              components: [
+                { name: "DrawGeometryComponent", args: ["blue"] },
+                { name: "RectangleGeometryComponent", args: [width, height] },
+              ]
+            },x: 0, 
+              y: 100
+        });
+
+        toReturn.addChild(gameObjectDef);
+
+
 
         return toReturn;
 
@@ -141,14 +162,9 @@ export default class Scene {
             let child = this.children[i];
             child.draw(ctx);
         }
-        // ctx.fillStyle = "grey";
-        // ctx.beginPath();
-        // ctx.arc(200, 200, 100, 0, 2 * Math.PI);
-        // ctx.rect(400, 0, -400, 400);
-        // ctx.fill();
 
         if (this.name === "BlueScene") {
-            ctx.fillStyle = "grey";
+            ctx.fillStyle = "black";
             ctx.beginPath();
             ctx.arc(this.getGameObject("Hero").x, this.getGameObject("Hero").y, 100, 0, 2 * Math.PI);
             let ground = this.getGameObject("Ground");

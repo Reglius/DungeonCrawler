@@ -1,4 +1,4 @@
-export default  class Component{
+export default class Component{
     constructor(gameObject){
         this.gameObject = gameObject;
     }

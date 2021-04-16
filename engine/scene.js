@@ -111,23 +111,23 @@ export default class Scene {
         } else {console.log("No diagrams for the current scene! This is OK!");}
         
         // adding key inventory here
-        var sizeX = sceneDefinition.children[0].gameObject.components[1].args[0];
-        var sizeY = sceneDefinition.children[0].gameObject.components[1].args[1];
-        var offsetX = sceneDefinition.children[0].x;
-        var offsetY = sceneDefinition.children[0].y;
+        // var sizeX = sceneDefinition.children[0].gameObject.components[1].args[0];
+        // var sizeY = sceneDefinition.children[0].gameObject.components[1].args[1];
+        // var offsetX = sceneDefinition.children[0].x;
+        // var offsetY = sceneDefinition.children[0].y;
 
-        let gameObjectDef = this.deserializeObject({
-            gameObject: {
-              name: "boundry" + boundry,
-              components: [
-                { name: "DrawGeometryComponent", args: ["blue"] },
-                { name: "RectangleGeometryComponent", args: [width, height] },
-              ]
-            },x: 0, 
-              y: 100
-        });
+        // let gameObjectDef = this.deserializeObject({
+        //     gameObject: {
+        //       name: "boundry" + boundry,
+        //       components: [
+        //         { name: "DrawGeometryComponent", args: ["blue"] },
+        //         { name: "RectangleGeometryComponent", args: [width, height] },
+        //       ]
+        //     },x: 0, 
+        //       y: 100
+        // });
 
-        toReturn.addChild(gameObjectDef);
+        // toReturn.addChild(gameObjectDef);
 
 
 

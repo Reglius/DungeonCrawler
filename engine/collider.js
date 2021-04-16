@@ -1,5 +1,4 @@
 import Rectangle from "./components/rectangle-geometry-component.js"
-import GameObject from "./game-object.js";
 
 
 export default class Collider {
@@ -32,18 +31,17 @@ export default class Collider {
                 
                 let r1x = one.gameObject.x - one.width/2;
                 let r1y = one.gameObject.y - one.height/2;
-                let r1w = one.width// + one.width/2;
-                let r1h = one.height// + one.height/2;
+                let r1w = one.width;
+                let r1h = one.height;
                 let r2x = two.gameObject.x - two.width/2;
                 let r2y = two.gameObject.y - two.height/2;
-                let r2w = two.width// + two.width/2;
-                let r2h = two.height// + two.height/2;
-
+                let r2w = two.width;
+                let r2h = two.height;
                 
-                if (r1x + r1w > r2x &&    // r1 right edge past r2 left
-                    r1x < r2x + r2w &&    // r1 left edge past r2 right
-                    r1y + r1h > r2y &&    // r1 top edge past r2 bottom
-                    r1y < r2y + r2h) {    // r1 bottom edge past r2 top
+                if (r1x + r1w > r2x &&
+                    r1x < r2x + r2w &&
+                    r1y + r1h > r2y &&
+                    r1y < r2y + r2h) {
                       return true;
                 }
                 return false;

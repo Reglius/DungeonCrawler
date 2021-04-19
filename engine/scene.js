@@ -1,5 +1,6 @@
 import GameObject from "./game-object.js"
 import SceneManager from "./scene-manager.js"
+import Keys from "./key-component.js"
 
 export default class Scene {
 
@@ -171,6 +172,10 @@ export default class Scene {
             ctx.rect(ground.x - (ground.components[1].width / 2), ground.y - (ground.components[1].height / 2), ground.components[1].width, ground.components[1].height);
             ctx.fill("evenodd");
         }
+        if (this.name === "RedScene") {
+            Keys.key1 = true;
+        }
+        console.log("Key1: " + Keys.key1);
     }
 
     /**

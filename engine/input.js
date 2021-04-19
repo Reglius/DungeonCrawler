@@ -93,47 +93,47 @@ export default class Input {
     document.body.addEventListener('contextmenu', contextmenu);
 
     function keydown(event) {
-      console.log("Down: " + event.key);
+      //console.log("Down: " + event.key);
       if (Input.keys[event.key] != true)
         Input.keysDown[event.key] = true;
       Input.keys[event.key] = true;
     }
 
     function keyup(event) {
-      console.log("Up: " + event.key)
+      //console.log("Up: " + event.key)
       if (Input.keys[event.key] != false)
         Input.keysUp[event.key] = true;
       Input.keys[event.key] = false;
     }
 
     function mousedown(event) {
-      console.log("Mouse Down: " + event.button)
+      //console.log("Mouse Down: " + event.button)
       if (Input.mouseButtons[event.button] != true)
         Input.mouseButtonsDown[event.button] = true;
       Input.mouseButtons[event.button] = true;
     }
 
     function mouseup(event) {
-      console.log("Mouse Up: " + event.button)
+      //console.log("Mouse Up: " + event.button)
       if (Input.mouseButtons[event.button] != false)
         Input.mouseButtonsUp[event.button] = true;
       Input.mouseButtons[event.button] = false;
     }
 
     function mousemove(event) {
-      //console.log("Mouse Move: " + event.clientX + ", " + event.clientY)
+      ////console.log("Mouse Move: " + event.clientX + ", " + event.clientY)
       Input.mousePosition.x = event.clientX;
       Input.mousePosition.y = event.clientY;
     }
 
     function wheelevent(event) {
-      console.log("Scroll Delta: " + event.deltaY)
+      //console.log("Scroll Delta: " + event.deltaY)
       if (event.deltaY != 0)
         Input.mouseScrollDelta = event.deltaY;
     }
 
     function keypress(event) {
-      //console.log(`Keys: ${event.key}, Modifier keys: Control: ${event.ctrlKey}, Alt: ${event.altKey}, Shift: ${event.shiftKey}, Meta Key: ${event.metaKey}`);
+      ////console.log(`Keys: ${event.key}, Modifier keys: Control: ${event.ctrlKey}, Alt: ${event.altKey}, Shift: ${event.shiftKey}, Meta Key: ${event.metaKey}`);
     }
 
     // Based on https://stackoverflow.com/questions/381795/how-to-disable-right-click-context-menu-in-javascript

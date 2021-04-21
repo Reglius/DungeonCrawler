@@ -50,6 +50,8 @@ export default class Scene {
             colors.set("b", "blue");
             colors.set("y", "yellow");
             colors.set("g", "green");
+            colors.set("k1", "yellow");
+            colors.set("k2", "red");
 
             // console.log(JSON.stringify(diagram, null, 2));
 
@@ -81,10 +83,21 @@ export default class Scene {
                         
                         let color = colors.get(diagram[i][j])
                         //console.log(color);
+                        let name;
+
+                        if (diagram[i][j] === "k1"){
+                            name = "k1";
+                        }
+                        else if (diagram[i][j] === "k2") {
+                            name = "k2";
+                        }
+                        else {
+                            name = "boundry" + boundry
+                        }
 
                         let gameObjectDef = this.deserializeObject({
                             gameObject: {
-                              name: "boundry" + boundry,
+                              name,
                               components: [
                                 { name: "DrawGeometryComponent", args: [color] },
                                 { name: "RectangleGeometryComponent", args: [width, height] },
@@ -172,10 +185,7 @@ export default class Scene {
             ctx.rect(ground.x - (ground.components[1].width / 2), ground.y - (ground.components[1].height / 2), ground.components[1].width, ground.components[1].height);
             ctx.fill("evenodd");
         }
-        if (this.name === "RedScene") {
-            Keys.key1 = true;
-        }
-        console.log("Key1: " + Keys.key1);
+        console.log("Key1: " + Keys.key1 + " Key2: " + Keys.key2);
     }
 
     /**
